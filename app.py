@@ -7,12 +7,13 @@ import atexit
 import sqlite3
 
 # ==================== CẤU HÌNH THÔNG TIN ====================
-GEMINI_API_KEY = "AQ.Ab8RN6LPoaPVKmbnIXskGnvhxkBGbJbb2UQRoFvlYTy81vGLCA"
-TELEGRAM_BOT_TOKEN = "712345678:AAYourRealTelegramToken"
-TELEGRAM_CHAT_ID = "123456789"      
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 
-# Cấu hình Gemini API
 genai.configure(api_key=GEMINI_API_KEY)
+TELEGRAM_BOT_TOKEN = st.secrets["TELEGRAM_BOT_TOKEN"]
+TELEGRAM_CHAT_ID = st.secrets["TELEGRAM_CHAT_ID"]
+
+
 
 # ==================== KHỞI TẠO BỘ NHỚ SQLITE (LONG-TERM MEMORY) ====================
 conn = sqlite3.connect("lam_chat_history.db", check_same_thread=False)
