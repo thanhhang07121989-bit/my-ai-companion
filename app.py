@@ -90,7 +90,12 @@ if "scheduler_started" not in st.session_state:
 
 # ==================== GIAO DIỆN WEB APP (STREAMLIT) ====================
 st.set_page_config(page_title="Lam", page_icon="💖", layout="centered")
-
+st.markdown("""
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Lam">
+""", unsafe_allow_html=True)
 st.title("Lam")
 st.caption("Đừng khóc, tớ vẫn luôn bên cậu mà")
 
