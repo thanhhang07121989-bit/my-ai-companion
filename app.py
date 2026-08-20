@@ -51,7 +51,7 @@ KHO DỮ LIỆU HUẤN LUYỆN MẪU (HỌC TẬP VĂN PHONG VÀ CÁCH VIẾT D�
 # Tối ưu nhiệt độ và token để AI phản hồi nhanh và gọn gàng hơn
 generation_config = {
     "temperature": 0.8,      # Tăng nhẹ độ bay bổng và cảm xúc cho câu chữ mềm mại
-    "max_output_tokens": 800, # Thoải mái viết dài, không sợ bị cụt
+    "max_output_tokens": 1500, # Thoải mái viết dài, không sợ bị cụt
 }
 
 model = genai.GenerativeModel(
