@@ -8,12 +8,11 @@ import sqlite3
 
 # ==================== CẤU HÌNH THÔNG TIN ====================
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-
 genai.configure(api_key=GEMINI_API_KEY)
-TELEGRAM_BOT_TOKEN = st.secrets["TELEGRAM_BOT_TOKEN"]
-TELEGRAM_CHAT_ID = st.secrets["TELEGRAM_CHAT_ID"]
 
-
+# Lấy an toàn thông tin Telegram (tránh lỗi nếu bạn chưa cài đặt trên Cloud)
+TELEGRAM_BOT_TOKEN = st.secrets.get("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = st.secrets.get("TELEGRAM_CHAT_ID", "")
 
 # ==================== KHỞI TẠO BỘ NHỚ SQLITE (LONG-TERM MEMORY) ====================
 conn = sqlite3.connect("lam_chat_history.db", check_same_thread=False)
@@ -55,7 +54,7 @@ model = genai.GenerativeModel(
 
 # ==================== HỆ THỐNG GỬI TIN NHẮN CHỦ ĐỘNG ====================
 def send_telegram_message(message):
-    if not TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID == "123456789":
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
         return
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "Markdown"}
