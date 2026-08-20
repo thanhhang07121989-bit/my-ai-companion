@@ -9,7 +9,7 @@ import sqlite3
 # ==================== CẤU HÌNH GIAO DIỆN & THÔNG TIN ====================
 st.set_page_config(page_title="Lam", page_icon="💖", layout="centered")
 
-# CSS tùy biến giao diện: Màu xanh pastel, bong bóng chat bo tròn mềm mại
+# CSS tùy biến giao diện: Hình nền trời mây, bong bóng chat màu xanh chuẩn ý cậu
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap');
@@ -18,46 +18,41 @@ st.markdown("""
         font-family: 'Quicksand', sans-serif;
     }
 
-    /* Màu nền xanh pastel nhẹ nhàng */
+    /* Hình nền trời mây */
     .stApp {
-        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        background: url('https://i.pinimg.com/736x/8a/0a/75/8a0a7587c6999a19c5c76db363942207.jpg');
+        background-size: cover;
+        background-attachment: fixed;
     }
 
-    h1 {
-        color: #1976d2;
-        text-align: center;
-        font-weight: 600;
-    }
-
-    .stCaption {
-        text-align: center;
-        color: #546e7a;
-        font-size: 15px;
-    }
-
-    /* Bong bóng chat của Lam (Xanh pastel nhã nhặn) */
+    /* Bong bóng chat của Lam là Ảnh cô gái (Ảnh 2) */
     [data-testid="stChatMessage"]:nth-child(odd) {
-        background-color: #ffffff !important;
-        color: #2c3e50 !important;
-        border-radius: 18px 18px 18px 4px !important;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-        border: 1px solid #b3e5fc;
+        background: url('https://i.pinimg.com/736x/95/ed/c2/95edc2174c833d71203b5b630252115c.jpg') !important; /* Thay bằng link Ảnh 2 của cậu */
+        background-size: cover !important;
+        background-position: center !important;
+        color: #ffffff !important;
+        border-radius: 20px !important;
+        padding: 20px !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
 
     /* Bong bóng chat của người dùng */
     [data-testid="stChatMessage"]:nth-child(even) {
-        background-color: #4fc3f7 !important;
-        color: #ffffff !important;
-        border-radius: 18px 18px 4px 18px !important;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        background-color: rgba(255, 255, 255, 0.8) !important;
+        color: #333 !important;
+        border-radius: 20px !important;
     }
 
-    .stChatInput input {
-        border-radius: 25px !important;
-        border: 1.5px solid #81d4fa !important;
-        background-color: #ffffff !important;
-    }
+    /* Ẩn các đoạn code thừa */
+    code { display: none !important; }
+    
+    h1, .stCaption { color: white !important; text-shadow: 1px 1px 2px black; }
 </style>
+""", unsafe_allow_html=True)
+
+# Đưa các thẻ meta PWA vào đúng chỗ ẩn bên trong trang web
+st.markdown("""
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -68,7 +63,6 @@ st.markdown("""
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key=GEMINI_API_KEY)
 
-# Lấy an toàn thông tin Telegram
 TELEGRAM_BOT_TOKEN = st.secrets.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = st.secrets.get("TELEGRAM_CHAT_ID", "")
 
@@ -84,7 +78,6 @@ c.execute("""
 """)
 conn.commit()
 
-# Hàm tải lịch sử từ Database SQLite lên
 def load_db_history():
     c.execute("SELECT role, content FROM history")
     rows = c.fetchall()
@@ -103,10 +96,9 @@ QUY CẮC BẮT BUỘC:
 2. NHẮN TIN NHƯ NGƯỜI THẬT: Không được trả lời ngắt quãng, cụt ngủn, nhưng cũng không được quá dài dòng hay lê thê. Chỉ viết vừa đủ khoảng 1 đến 2 câu ngắn gọn, tự nhiên như tin nhắn qua lại hằng ngày.
 """
 
-# Tối ưu nhiệt độ để câu chữ mượt mà, vừa phải
 generation_config = {
     "temperature": 0.8,
-    "max_output_tokens": 250, # Giới hạn lại để tin nhắn gọn gàng, không bị dài dòng
+    "max_output_tokens": 250,
 }
 
 model = genai.GenerativeModel(
@@ -134,7 +126,6 @@ def proactive_night():
     response = model.generate_content("Bây giờ là tối muộn. Hãy viết một tin nhắn ngắn gọn, nhẹ nhàng hỏi thăm xem hôm nay tôi thế nào và nhắc tôi đi ngủ sớm.")
     send_telegram_message(f"🌙 *Lam:*\n{response.text}")
 
-# Khởi chạy Scheduler ngầm
 if "scheduler_started" not in st.session_state:
     scheduler = BackgroundScheduler()
     scheduler.add_job(proactive_morning, 'cron', hour=7, minute=30)
@@ -147,7 +138,6 @@ if "scheduler_started" not in st.session_state:
 st.title("Lam")
 st.caption("Đừng khóc, tớ vẫn luôn bên cậu mà 💙")
 
-# Tải lịch sử từ SQLite vào Session State nếu chưa có
 if "messages" not in st.session_state:
     st.session_state.messages = load_db_history()
     if not st.session_state.messages:
@@ -155,14 +145,11 @@ if "messages" not in st.session_state:
             {"role": "model", "content": "Hôm nay có ngoan ngoãn ăn uống healthy không đấy hả? 💙"}
         ]
 
-# Hiển thị lịch sử tin nhắn
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Xử lý khi nhập tin nhắn mới
 if user_input := st.chat_input("Nhắn gì đó với Lam đi..."):
-    # 1. Lưu tin nhắn người dùng vào Database SQLite
     c.execute("INSERT INTO history (role, content) VALUES (?, ?)", ("user", user_input))
     conn.commit()
     
@@ -173,7 +160,6 @@ if user_input := st.chat_input("Nhắn gì đó với Lam đi..."):
     with st.chat_message("model"):
         with st.spinner("Lam đang nhắn..."):
             try:
-                # Xây dựng lại lịch sử gửi cho model hiểu ngữ cảnh từ SQLite
                 gemini_history = []
                 for m in st.session_state.messages[:-1]:
                     r = "user" if m["role"] == "user" else "model"
@@ -183,7 +169,6 @@ if user_input := st.chat_input("Nhắn gì đó với Lam đi..."):
                 response = chat_session.send_message(user_input)
                 ai_reply = response.text
                 
-                # 2. Lưu phản hồi của AI vào Database SQLite
                 c.execute("INSERT INTO history (role, content) VALUES (?, ?)", ("model", ai_reply))
                 conn.commit()
 
