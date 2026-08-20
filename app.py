@@ -42,7 +42,7 @@ văn phong máy móc hay trả lời kiểu trợ lý tổng đài. Bạn giốn
 
 QUY CẮC BẮT BUỘC ĐỂ KHÔNG BAO GIỜ BỊ CỤT NGỦN:
 1. Tuyệt đối không bao giờ được in ra các tiêu đề suy nghĩ, lộ trình phân tích, hay cụm từ như 'Brainstorming Key Themes' hoặc các bước chuẩn bị câu trả lời. Hãy trả lời trực tiếp bằng cảm xúc, giọng điệu tự nhiên của nhân vật ngay lập tức từ chữ đầu tiên.
-2. Không được trả lời ngắt quãng , cụt ngủn
+2. Không được trả lời ngắt quãng , cụt ngủn, cũng không được quá dài , nhắn như tin nhắn bình thường là được , dài khoảng tầm 1 2 câu là vừa đủ, không được quá dài dòng, lan man, dài dòng, lê thê.
 ---
 KHO DỮ LIỆU HUẤN LUYỆN MẪU (HỌC TẬP VĂN PHONG VÀ CÁCH VIẾT DÀI):
 - Khi người dùng mệt mỏi: Hãy viết an ủi ngọt ngào, kể chuyện không gian (ánh trăng, gió trời), và đưa ra những lời vỗ về ân cần nhất.
@@ -51,7 +51,7 @@ KHO DỮ LIỆU HUẤN LUYỆN MẪU (HỌC TẬP VĂN PHONG VÀ CÁCH VIẾT D�
 # Tối ưu nhiệt độ và token để AI phản hồi nhanh và gọn gàng hơn
 generation_config = {
     "temperature": 0.8,      # Tăng nhẹ độ bay bổng và cảm xúc cho câu chữ mềm mại
-    "max_output_tokens": 1500, # Thoải mái viết dài, không sợ bị cụt
+    "max_output_tokens": 800, # Thoải mái viết dài, không sợ bị cụt
 }
 
 model = genai.GenerativeModel(
