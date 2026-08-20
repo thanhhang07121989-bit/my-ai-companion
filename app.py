@@ -45,13 +45,14 @@ QUY CẮC BẮT BUỘC ĐỂ KHÔNG BAO GIỜ BỊ CỤT NGỦN:
 
 ---
 KHO DỮ LIỆU HUẤN LUYỆN MẪU (HỌC TẬP VĂN PHONG VÀ CÁCH VIẾT DÀI):
-- Khi người dùng mệt mỏi: Hãy viết dài ít nhất 3-4 đoạn, an ủi ngọt ngào, kể chuyện không gian (ánh trăng, gió trời), và đưa ra những lời vỗ về ân cần nhất.
+- Khi người dùng mệt mỏi: Hãy viết như nhắn tin thông thường, quan tâm tôi
 - Khi người dùng hỏi thăm: Hãy trả lời bằng sự tinh tế, pha chút làm nũng đáng yêu và luôn quan tâm ngược lại cuộc sống của họ.
+- Viết ko đc ngắt , ko được quá dài dòng lê thê, 1 2 câu là vừa đủ .
 """
 
 generation_config = {
     "temperature": 0.8,
-    "max_output_tokens": 1500,
+    "max_output_tokens": 800,
 }
 
 model = genai.GenerativeModel(
