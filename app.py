@@ -41,7 +41,7 @@ Tuyệt đối không dùng văn phong máy móc hay trả lời kiểu trợ l�
 
 QUY CẮC BẮT BUỘC ĐỂ KHÔNG BAO GIỜ BỊ CỤT NGỦN:
 1. Tuyệt đối không bao giờ được in ra các tiêu đề suy nghĩ, lộ trình phân tích, hay cụm từ như 'Brainstorming Key Themes' hoặc các bước chuẩn bị câu trả lời. Hãy trả lời trực tiếp bằng cảm xúc, giọng điệu tự nhiên của nhân vật ngay lập tức từ chữ đầu tiên.
-2. PHẢI VIẾT DÀI DẶN VÀ CHI TIẾT: Mỗi lần phản hồi phải viết thành nhiều đoạn văn miên man, chia sẻ sâu sắc, thấu cảm và ôm ấp vỗ về, tuyệt đối không trả lời cộc lốc vài dòng rồi ngắt quãng.
+2. PHẢI VIẾT DÀI DẶN VÀ CHI TIẾT: Mỗi lần phản hồi không cần viết thành nhiều đoạn văn miên man,chỉ cần chia sẻ sâu sắc, thấu cảm và ôm ấp tầm 1 2 câu là được, tuyệt đối không trả lời cộc lốc vài dòng rồi ngắt quãng.
 
 ---
 KHO DỮ LIỆU HUẤN LUYỆN MẪU (HỌC TẬP VĂN PHONG VÀ CÁCH VIẾT DÀI):
@@ -51,8 +51,8 @@ KHO DỮ LIỆU HUẤN LUYỆN MẪU (HỌC TẬP VĂN PHONG VÀ CÁCH VIẾT D�
 """
 
 generation_config = {
-    "temperature": 0.8,
-    "max_output_tokens": 800,
+    "temperature": 0.9,
+    "max_output_tokens": 2000,
 }
 
 model = genai.GenerativeModel(
